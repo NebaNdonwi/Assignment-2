@@ -1,0 +1,55 @@
+import java.util.Scanner;
+public class RandomNumberGuesser {
+
+	public static void main(String[] args) {
+		String answer;
+		int nextGuess;
+		int highGuess = 100;
+		int lowGuess = 0;
+		int randNum;
+		Scanner Input = new Scanner(System.in);
+		
+		 randNum = RNG.rand();
+		
+		System.out.println("Enter your first guess between 0 and 100");
+		nextGuess = Input.nextInt();
+		
+		while(nextGuess!= randNum) {
+			
+			if((int)RNG.getCount()/2 != 0)
+				System.out.println("Number of guesses is " + (int)RNG.getCount()/2 );
+			
+			while(!RNG.inputValidation(nextGuess, lowGuess, highGuess)) {
+				nextGuess=Input.nextInt();
+			}
+			
+			if (nextGuess> randNum) {
+				highGuess= nextGuess;
+			}
+			
+			else if(nextGuess<randNum) {
+				lowGuess= nextGuess;
+			}
+		}
+			 if(nextGuess == randNum) {
+				 System.out.println("Congratulations, you guessed correctly!");
+				 System.out.println("Try again? (yes or no)");
+				 answer = Input.nextLine();
+			 
+				 if(answer.equals("yes"))
+				 {
+					 RNG.resetCount();
+					 main(args);
+			     }	 
+				 
+			 
+			 else
+					 System.exit(0);
+			
+			 }
+				Input.close();	
+	
+	}	
+}
+	
+
